@@ -1,3 +1,12 @@
+<?php
+   try {
+        require_once('funciones/bd_conexion.php');
+   } catch (Exception $e) {
+         $error = $e->getMessage();
+   } 
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,9 +19,6 @@
 <body>
     <div class="contenedor">
         <h1>Agenda de Contactos</h1>
-
-        
-
         <div class="contenido">
               <div class="crear">
                   <h2>Nuevo Contacto</h2>
