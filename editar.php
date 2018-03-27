@@ -28,17 +28,17 @@
               <div class="crear">
                   <h2>Editar Contacto</h2>
                   <form action="actualizar.php" method="get">
-                    <?php while ($registro = $resultado->fetch_assoc()) { ?>
+                    <?php while ($registros = $resultado->fetch_assoc()) { ?>
 
                           <div class="campo">
                               <label for="nombre">Nombre:</label>
-                              <input type="text" value="<?php echo $registro['nombre'] ?>"name="nombre" id="nombre" placeholder="Nombre">
+                              <input type="text" value="<?php echo $registros['nombre'] ?>"name="nombre" id="nombre" placeholder="Nombre">
                           </div>
                           <div class="campo">
                               <label for="numero">Teléfono:</label>
-                              <input type="text" value="<?php echo $registro['telefono'] ?> "name="numero" id="numero" placeholder="Número">
+                              <input type="text" value="<?php echo $registros['telefono'] ?> "name="numero" id="numero" placeholder="Número">
                           </div>
-                          <input type="hidden" name="id" value="<?php echo $registro['id']; ?>">
+                          <input type="hidden" name="id" value="<?php echo $registros['id']; ?>">
                           <input type="submit" value="Modificar" id="agregar" class="boton">
                           <?php } ?>
                   </form>
