@@ -1,9 +1,11 @@
 <?php
    try {
         require_once('funciones/bd_conexion.php');
+        $sql = 'SELECT * FROM contactos';
+        $resultado = $conn->query($sql);
    } catch (Exception $e) {
          $error = $e->getMessage();
-   } 
+   }
 ?>
 
 
@@ -28,15 +30,50 @@
                               <input type="text" name="nombre" id="nombre" placeholder="Nombre">
                           </div>
                           <div class="campo">
-                              <label for="numero">Teléfono:</label>      
+                              <label for="numero">Teléfono:</label>
                               <input type="text" name="numero" id="numero" placeholder="Número">
                           </div>
-                          <input type="submit" value="Agregar" id="agregar" class="boton">  
+                          <input type="submit" value="Agregar" id="agregar" class="boton">
                   </form>
               </div><!--.crear_contacto-->
         </div> <!--.contenido-->
-
+        <div class="contenido existentes">
+          <h2>Contactos existentes</h2>
+          <p>Número de Contactos : <?php echo $resultado->num_rows ?></p>
+          <table id="registrados">
+            <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Teléfono</th>
+                  <th>Editar</th>
+                  <th><button type="button" name="Borrar" id="btn_borrar" class="borrar">Borrar</button></th>
+                </tr>
+            </thead>
+            <tbody>
+              <tbody>
+                        <?php //fetch_assoc, fetch_row, fetch_array, fetch_all, fetch_objects  ?>
+                        <?php while($registros = $resultado->fetch_assoc() ) { ?>
+                            <tr id="<?php echo $registros['id']; ?>">
+                                  <td>
+                                    <?php echo $registros['nombre']; ?>
+                                  </td>
+                                  <td>
+                                    <?php echo $registros['telefono']; ?>
+                                  </td>
+                                  <td>
+                                    <a href="editar.php?id=<?php echo $registros['id']; ?>">Editar</a>
+                                  </td>
+                                  <td class="borrar">
+                                      <input class="borrar_contacto" type="checkbox" name="<?php echo $registros['id']; ?>">
+                                  </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+          </table>
+        </div>
     </div>
-    
+    <?php
+      $conn->close();
+    ?>
 </body>
 </html>
