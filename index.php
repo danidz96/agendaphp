@@ -64,7 +64,7 @@
                                     <a href="editar.php?id=<?php echo $registros['id']; ?>">Editar</a>
                                   </td>
                                   <td class="borrar">
-                                      <input class="borrar_contacto" type="checkbox" name="<?php echo $registros['id']; ?>">
+                                      <a href="borrar.php?id=<?php echo $registros['id']; ?>">Borrar</a>
                                   </td>
                             </tr>
                         <?php } ?>
