@@ -1,9 +1,12 @@
 <?php
+  function ajax(){
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+  }
   if (isset($_POST['nombre'])) {
-    $nombre = $_POST['nombre'];
+    $nombre = htmlspecialchars($_POST['nombre']);
   }
   if (isset($_POST['numero'])) {
-    $numero = $_POST['numero'];
+    $numero = htmlspecialchars($_POST['numero']);
   }
 
    try {
@@ -12,39 +15,17 @@
           $sql .= "VALUES (NULL, '{$nombre}', '{$numero}');";
 
         $resultado = $conn->query($sql);
+
+        if (ajax()) {
+          echo json_encode(array(
+            'respuesta' => $resultado
+          ));
+        }else {
+          exit;
+        }
    } catch (Exception $e) {
          $error = $e->getMessage();
    }
-?>
 
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Agenda PHP</title>
-    <link rel="stylesheet" href="css/estilos.css" media="screen">
-</head>
-<body>
-    <div class="contenedor">
-        <h1>Agenda de Contactos</h1>
-        <div class="contenido">
-          <?php
-          if ($resultado) {
-            echo "Contacto creado";
-          }else {
-            echo "error " . $conn->error;
-          }
-           ?>
-           <br>
-           <a class="volver" href="index.php">Volver a Inicio</a>
-        </div> <!--.contenido-->
-
-    </div>
-<?php
 $conn->close();
  ?>
-</body>
-</html>

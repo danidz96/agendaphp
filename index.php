@@ -24,7 +24,7 @@
         <div class="contenido">
               <div class="crear">
                   <h2>Nuevo Contacto</h2>
-                  <form action="crear.php" method="post">
+                  <form action="crear.php" method="post" id="formulario_crear_usuario">
                           <div class="campo">
                               <label for="nombre">Nombre:</label>
                               <input type="text" name="nombre" id="nombre" placeholder="Nombre">
@@ -75,8 +75,6 @@
     <?php
       $conn->close();
     ?>
-    <script type="text/javascript" src="js/app.js">
-
-    </script>
+    <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
